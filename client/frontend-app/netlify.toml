@@ -1,0 +1,8 @@
+[build]
+  base = "client/frontend-app"
+  command = "npm run build"
+  publish = "client/frontend-app/.next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_TELEMETRY_DISABLED = "1"
