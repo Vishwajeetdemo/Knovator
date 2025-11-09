@@ -1,4 +1,9 @@
+import { use, useEffect } from "react";
+
 export default function Navbar() {
+    useEffect(() => {
+        
+    }, []);
     return (
         <nav className="bg-white shadow-md h-16 flex items-center justify-between px-6 border-b border-gray-200">
             {/* Left side: page title or logo */}

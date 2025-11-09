@@ -2,23 +2,42 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { getAppUrl } from "../../function/getEnv";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const appUrl = getAppUrl();
+  
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (email === "admin@gmail.com" && password === "admin") {
-      localStorage.setItem("token", "fake-jwt-token");
-      router.push("/");
-    } else {
-      setError("Invalid email or password");
+    try {
+      const response = await fetch(`${appUrl}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token); 
+        router.push("/");
+      } else {
+        setError(data.message || "Invalid email or password");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Something went wrong. Please try again later.");
     }
   };
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-300">

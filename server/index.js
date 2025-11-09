@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import route from './router/route.import.js';
+import authRouter from './router/router.login.js';
 import connectDB from './config/db.js';
 import './cron/jobCron.js';
 
@@ -11,7 +12,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 connectDB();
-
+app.use('/auth', authRouter);
 app.use('/api', route);
 
 
