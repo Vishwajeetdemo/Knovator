@@ -5,7 +5,8 @@ import { getAppUrl } from "./function/getEnv";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const apiUrl = getAppUrl(process.env.NODE_ENV || "development");
+  //const apiUrl = getAppUrl(process.env.NODE_ENV || "development");
+  const appUrl = getAppUrl(process.env.NODE_ENV || "production");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
