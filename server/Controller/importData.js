@@ -4,11 +4,11 @@ import Job from "../models/job.js";
 import ImportLog from "../models/ImportLog.js";
 import Redis from "ioredis";
 
-const redis = new Redis({
-    host: "127.0.0.1",
-    port: 6379,
-});
-
+// const redis = new Redis({
+//     host: "127.0.0.1",
+//     port: 6379,
+// });
+const redis = new Redis(process.env.REDIS_URL);
 const API_URLS = [
     { url: "https://jobicy.com/?feed=job_feed", source: "Jobicy-All" },
     { url: "https://jobicy.com/?feed=job_feed&job_categories=smm&job_types=full-time", source: "Jobicy-SMM" },
